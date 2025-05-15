@@ -19,8 +19,11 @@ public:
 
 private slots:
     void on_buttRigist_clicked();
+    void on_buttSign_clicked();
+
 signals:
     void showRigistWindow();
+    void showUserWindow();
 
 private:
     Ui::MainWindow *ui;
