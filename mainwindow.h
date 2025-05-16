@@ -21,9 +21,12 @@ private slots:
     void on_buttRigist_clicked();
     void on_buttSign_clicked();
 
+    void on_buttManage_clicked();
+
 signals:
     void showRigistWindow();
     void showUserWindow();
+    void showManaWD();
 
 private:
     Ui::MainWindow *ui;

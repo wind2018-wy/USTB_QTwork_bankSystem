@@ -14,5 +14,3 @@ using namespace std;
 struct deleter {
     template <class T> void operator () (T* p) { delete p; }
 };
-Date tdate(2008, 11, 1);//起始日期
-vector<Account*> accounts;//创建账户数组，元素个数为0

@@ -3,7 +3,10 @@
 #include "rigistwindow.h"
 #include <QObject>
 #include "userwindow.h"
-
+#include <vector>
+#include "managewd.h"
+extern Date* ptdate;
+extern std::vector<Account*>* paccounts;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -18,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_buttRigist_clicked()
 {
-    static rigistWindow riwin;
+    static rigistWindow riwin(nullptr,ptdate,paccounts);
     QObject::connect(this,SIGNAL(showRigistWindow()),&riwin,SLOT(recvRigistWindow()));
     emit showRigistWindow();
 }
@@ -26,8 +29,15 @@ void MainWindow::on_buttRigist_clicked()
 
 void MainWindow::on_buttSign_clicked()
 {
-    static userWindow riwin;
+    static userWindow riwin(nullptr,ptdate,paccounts);
     QObject::connect(this,SIGNAL(showUserWindow()),&riwin,SLOT(recvUserSlots()));
     emit showUserWindow();
+}
+
+void MainWindow::on_buttManage_clicked()
+{
+    static manageWD riwin(nullptr);
+    QObject::connect(this,SIGNAL(showManaWD()),&riwin,SLOT(recvManaWD()));
+    emit showManaWD();
 }
 

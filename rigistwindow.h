@@ -2,6 +2,7 @@
 #define RIGISTWINDOW_H
 
 #include <QWidget>
+#include "account.h"
 
 namespace Ui {
 class rigistWindow;
@@ -12,7 +13,9 @@ class rigistWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit rigistWindow(QWidget *parent = nullptr);
+    Date* ptdate;
+    std::vector<Account*>* paccounts;
+    explicit rigistWindow(QWidget *parent = nullptr,Date* =nullptr,std::vector<Account*>* =nullptr);
     ~rigistWindow();
 private slots:
     void recvRigistWindow();

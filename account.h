@@ -16,6 +16,7 @@ int monthDays(int, int);
 class Date;
 void printDate(Date);
 bool isLetter(char);
+bool toDouble(QString,double&);
 class AccountRecord;
 class Date {
 public:
@@ -23,6 +24,7 @@ public:
     Date();
     Date(const Date&);
     Date(int, int, int);
+    void setDate(int,int,int);
     int getYear() { return year; }
     int getMonth() { return month; }
     int getDay() { return day; }
@@ -53,6 +55,7 @@ public:
     QString pass;
     Date date;
     QString id;
+    QString getid();
     double balance;
     double rate;
     double accumulation;

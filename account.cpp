@@ -7,7 +7,12 @@ SavingsAccount::SavingsAccount(Date triDate, QString strid, double rate,QString 
     date = triDate;
     //printDate(triDate);
 }
-
+QString Account::getid(){
+    return id;
+}
+void Date::setDate(int a,int b,int c){
+    year=a;month=b;day=c;
+}
 
 
 
@@ -133,6 +138,14 @@ int monthDays(int y, int m) {
 }
 void printDate(Date a) {
     //std::cout << a.year << '-' << a.month << '-' << std::left << std::setw(10) << a.day;
+}
+bool toDouble(QString a,double&b){
+    bool ok;
+    b=a.toDouble(&ok);
+    if(ok)
+        return true;
+    else
+        return false;
 }
 bool isLetter(char a) {
     if (a >= 'a' && a <= 'z')return true;
