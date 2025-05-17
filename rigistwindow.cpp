@@ -101,7 +101,7 @@ void rigistWindow::on_rigistOK_clicked()
     }
 
     (*paccounts).push_back(account);
-    QMessageBox::information(this, tr("Information"), tr("注册成功"));
+    QMessageBox::information(this, tr("提示"), tr("注册成功"));
     this->hide();
 }
 

@@ -59,6 +59,7 @@ void operateWD::on_bWithdraw_clicked()
     QString QSthing=ui->thingEdit->text();
     if((*paccounts)[index]->balance-amount<-(*paccounts)[index]->credit){
         QMessageBox::information(this, tr("提示"), tr("取钱失败，超出信用额度"));
+        return;
     }
     (*paccounts)[index]->withdraw(*ptdate, amount, QSthing);
     QMessageBox::information(this, tr("提示"), tr("取钱成功"));

@@ -62,6 +62,7 @@ public:
     double accumulation;
     static double total;
     Account(QString pid, double pbalance, double prate,QString passa) :id(pid), balance(pbalance), rate(prate),pass(passa) {}
+    Account(QString pid, double pbalance, double prate,QString passa,double credita) :id(pid), balance(pbalance), rate(prate),pass(passa),credit(credita) {}
     static double getTotal();
     virtual void show() = 0;
     virtual void deposit(Date, double, QString) = 0;

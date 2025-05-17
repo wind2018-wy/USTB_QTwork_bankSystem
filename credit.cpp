@@ -2,7 +2,7 @@
 #include <QString>
 
 
-CreditAccount::CreditAccount(Date triDate, QString strid, double credit, double rate, double fee,QString passa) :Account(strid, 0, rate,passa), credit(credit), fee(fee){
+CreditAccount::CreditAccount(Date triDate, QString strid, double credit, double rate, double fee,QString passa) :Account(strid, 0, rate,passa,credit),  fee(fee){
     accumulation = 0;
     this->date = triDate;
 }
