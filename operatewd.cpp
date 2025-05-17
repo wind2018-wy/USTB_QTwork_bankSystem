@@ -31,9 +31,15 @@ void operateWD::on_bDeposit_clicked()
     double amount=QSmoney.toDouble(&ok);
     if(!ok){
         QMessageBox::warning(this,tr("warning"),tr("请输入有效金额"));
+        return;
+    }
+    if(amount<=0){
+        QMessageBox::warning(this,tr("warning"),tr("金额应为正数"));
+        return;
     }
     QString QSthing=ui->thingEdit->text();
     (*paccounts)[index]->deposit(*ptdate, amount, QSthing);
+    QMessageBox::information(this, tr("提示"), tr("存钱成功"));
 }
 
 
@@ -44,9 +50,21 @@ void operateWD::on_bWithdraw_clicked()
     double amount=QSmoney.toDouble(&ok);
     if(!ok){
         QMessageBox::warning(this,tr("warning"),tr("请输入有效金额"));
+        return;
+    }
+    if(amount<=0){
+        QMessageBox::warning(this,tr("warning"),tr("金额应为正数"));
+        return;
     }
     QString QSthing=ui->thingEdit->text();
+    if((*paccounts)[index]->balance-amount<-(*paccounts)[index]->credit){
+        QMessageBox::information(this, tr("提示"), tr("取钱失败，超出信用额度"));
+    }
     (*paccounts)[index]->withdraw(*ptdate, amount, QSthing);
+    QMessageBox::information(this, tr("提示"), tr("取钱成功"));
+    clear:
+    ui->moneyEdit->clear();
+    ui->thingEdit->clear();
 }
 
 
@@ -111,6 +129,7 @@ void operateWD::on_changeDate_clicked()
                 (*paccounts)[i]->date = (*ptdate);
             }
         }
+        QMessageBox::information(this, tr("提示"), tr("日期跳转成功"));
 }
 
 
@@ -120,6 +139,10 @@ void operateWD::on_showMessage_clicked()
     QDate Qdate1=ui->dateBegin->date(),Qdate2=ui->dateEnd->date();
     date1.setDate(Qdate1.year(),Qdate1.month(),Qdate1.day());
     date2.setDate(Qdate2.year(),Qdate2.month(),Qdate2.day());
+    if(date1>date2){
+        QMessageBox::warning(this,tr("warning"),tr("结束日期应晚于起始日期"));
+        return;
+    }
     std::multimap<Date, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
     for (iter = (*paccounts)[index]->recordmap.begin(); iter != (*paccounts)[index]->recordmap.end(); iter++) {
         if (iter->first < date1)continue;

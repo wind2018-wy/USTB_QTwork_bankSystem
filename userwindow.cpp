@@ -29,6 +29,14 @@ void userWindow::on_sign_clicked()
 {
     QString tname=ui->nameE->text();
     QString tpass=ui->passE->text();
+    if(tname.length()==0){
+        QMessageBox::warning(this,tr("warning"),tr("用户名不能为空"));
+        return;
+    }
+    if(tpass.length()==0){
+        QMessageBox::warning(this,tr("warning"),tr("密码不能为空"));
+        return;
+    }
     int lengtha=(*paccounts).size();
     bool getAccount=false;
     int numAccount=-1;

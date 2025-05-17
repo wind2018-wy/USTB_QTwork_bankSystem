@@ -56,6 +56,7 @@ public:
     Date date;
     QString id;
     QString getid();
+    double credit;//信用额度
     double balance;
     double rate;
     double accumulation;
@@ -82,7 +83,6 @@ public:
 };
 class CreditAccount :public Account {
 public:
-    double credit;//信用额度
     double fee;//年费
     CreditAccount(Date triDate, QString id, double credit, double rate, double fee,QString);
     void show();
