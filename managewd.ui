@@ -13,6 +13,44 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QPushButton" name="bShow">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>50</y>
+     <width>131</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查询各个账户信息</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="accountsShow">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>311</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>账户名</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>余额</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>账户类型</string>
+    </property>
+   </column>
+  </widget>
  </widget>
  <resources/>
  <connections/>

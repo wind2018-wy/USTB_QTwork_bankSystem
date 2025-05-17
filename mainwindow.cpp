@@ -36,7 +36,7 @@ void MainWindow::on_buttSign_clicked()
 
 void MainWindow::on_buttManage_clicked()
 {
-    static manageWD riwin(nullptr);
+    static manageWD riwin(nullptr,ptdate,paccounts);
     QObject::connect(this,SIGNAL(showManaWD()),&riwin,SLOT(recvManaWD()));
     emit showManaWD();
 }

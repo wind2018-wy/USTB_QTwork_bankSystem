@@ -21,6 +21,14 @@ public:
 private slots:
     void recvOperateWD();
 
+    void on_bDeposit_clicked();
+
+    void on_bWithdraw_clicked();
+
+    void on_changeDate_clicked();
+
+    void on_showMessage_clicked();
+
 private:
     Ui::operateWD *ui;
 };
