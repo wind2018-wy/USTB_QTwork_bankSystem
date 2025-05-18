@@ -63,9 +63,6 @@ void operateWD::on_bWithdraw_clicked()
     }
     (*paccounts)[index]->withdraw(*ptdate, amount, QSthing);
     QMessageBox::information(this, tr("提示"), tr("取钱成功"));
-    clear:
-    ui->moneyEdit->clear();
-    ui->thingEdit->clear();
 }
 
 
@@ -148,7 +145,7 @@ void operateWD::on_showMessage_clicked()
     for (iter = (*paccounts)[index]->recordmap.begin(); iter != (*paccounts)[index]->recordmap.end(); iter++) {
         if (iter->first < date1)continue;
         if (iter->first > date2)break;
-        ui->queryBrow->setText(QString::number(iter->first.year)+'-'+QString::number(iter->first.month)+'-'+QString::number(iter->first.day)+"          "+iter->second.account->id+' '+QString::number(iter->second.balance));
+        ui->queryBrow->setText(QString::number(iter->first.year)+'-'+QString::number(iter->first.month)+'-'+QString::number(iter->first.day)+"     "+iter->second.account->id+"     "+QString::number(iter->second.balance));
 
     }
 }

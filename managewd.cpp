@@ -23,14 +23,12 @@ void manageWD::recvManaWD(){
 
 void manageWD::on_bShow_clicked()
 {
-    qDebug()<<"ok1";
     std::size_t length;
     if (paccounts != nullptr) {
         length = paccounts->size();
     } else {
         return;
     }
-    qDebug()<<"ok2";
     ui->accountsShow->setRowCount(length+1);
     ui->accountsShow->setColumnCount(3);
     for (int i = 0; i < length; ++i) {
