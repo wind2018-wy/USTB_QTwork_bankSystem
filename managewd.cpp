@@ -29,7 +29,7 @@ void manageWD::on_bShow_clicked()
     } else {
         return;
     }
-    ui->accountsShow->setRowCount(length+1);
+    ui->accountsShow->setRowCount(length);
     ui->accountsShow->setColumnCount(3);
     for (int i = 0; i < length; ++i) {
         QTableWidgetItem* item1 = new QTableWidgetItem((*paccounts)[i]->id);

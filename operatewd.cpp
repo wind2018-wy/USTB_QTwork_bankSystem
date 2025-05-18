@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 operateWD::operateWD(QWidget *parent,Date* ptdatea,std::vector<Account*>* paccountsa,int indexa)
     : QWidget(parent)
@@ -39,6 +40,13 @@ void operateWD::on_bDeposit_clicked()
     }
     QString QSthing=ui->thingEdit->text();
     (*paccounts)[index]->deposit(*ptdate, amount, QSthing);
+
+    std::ofstream out;
+    out<<"d "<<index<<' '<<amount;
+    if(QSthing.length()!=0)
+        out<<' '<<QSthing.toStdString()<<std::endl;
+    out.close();
+
     QMessageBox::information(this, tr("提示"), tr("存钱成功"));
 }
 
@@ -62,6 +70,13 @@ void operateWD::on_bWithdraw_clicked()
         return;
     }
     (*paccounts)[index]->withdraw(*ptdate, amount, QSthing);
+
+    std::ofstream out;
+    out<<"d "<<index<<' '<<amount;
+    if(QSthing.length()!=0)
+        out<<' '<<QSthing.toStdString()<<std::endl;
+    out.close();
+
     QMessageBox::information(this, tr("提示"), tr("取钱成功"));
 }
 
@@ -127,6 +142,27 @@ void operateWD::on_changeDate_clicked()
                 (*paccounts)[i]->date = (*ptdate);
             }
         }
+
+        std::ofstream out;
+        if(month>9){
+            if(day>9){
+                out<<"C "<<year<<'/'<<month<<'/'<<day<<std::endl;
+            }
+            else{
+                out<<"C "<<year<<'/'<<month<<"/ "<<day<<std::endl;
+            }
+        }
+        else{
+            if(day>9){
+                out<<"C "<<year<<"/ "<<month<<'/'<<day<<std::endl;
+            }
+            else{
+                out<<"C "<<year<<"/ "<<month<<"/ "<<day<<std::endl;
+            }
+        }
+
+        out.close();
+
         QMessageBox::information(this, tr("提示"), tr("日期跳转成功"));
 }
 

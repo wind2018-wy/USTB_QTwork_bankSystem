@@ -65,10 +65,10 @@ int main(int argc, char *argv[])
             }
             else{
                 blankIndex = aCommand.find(' ', cIndex);
-                mcredit = std::stod(aCommand.substr(cIndex, blankIndex - cIndex));
+                mrate = std::stod(aCommand.substr(cIndex, blankIndex - cIndex));
                 cIndex = blankIndex + 1;
                 blankIndex = aCommand.find(' ', cIndex);
-                mrate = std::stod(aCommand.substr(cIndex, blankIndex - cIndex));
+                mcredit = std::stod(aCommand.substr(cIndex, blankIndex - cIndex));
                 cIndex = blankIndex + 1;//stod
                 blankIndex = aCommand.find(' ', cIndex);
                 mfee = std::stod(aCommand.substr(cIndex));
@@ -138,6 +138,48 @@ int main(int argc, char *argv[])
             }
             else{
                 month++;
+            }
+            (*ptdate) = Date((*ptdate).getYear(), (*ptdate).getMonth(), day);
+            int accountsLength = (*paccounts).size();
+            for (int i = 0; i < accountsLength; i++) {
+                if ((*paccounts)[i]->id[0] == 'C' && (*paccounts)[i]->balance >= 0) {
+                    (*paccounts)[i]->date = (*ptdate);
+                    continue;
+                }
+                else {
+                    (*paccounts)[i]->accumulation += diffDate((*paccounts)[i]->date, (*ptdate)) * (*paccounts)[i]->balance;
+                    (*paccounts)[i]->date = (*ptdate);
+                }
+            }
+        }
+
+        if(c=='C'){
+            std::string dateStr=aCommand.substr(cIndex);
+            Date datea=(*ptdate);
+            int year=std::stod(dateStr.substr(0,4));
+            int month=std::stod(dateStr.substr(5,2));
+            int day=std::stod(dateStr.substr(8,2));
+
+            for(;;){
+                if(year>(*ptdate).year)
+                    goto monthTake;
+                else{
+                    if(month>(*ptdate).month){
+                        goto monthTake;
+                    }
+                    else
+                        break;
+                }
+            monthTake:
+                if ((*ptdate).getMonth() == 12)
+                    (*ptdate) = Date((*ptdate).getYear() + 1, 1, 1);
+                else
+                    (*ptdate) = Date((*ptdate).getYear(), (*ptdate).getMonth() + 1, 1);
+                for (std::vector<Account*>::iterator iter = (*paccounts).begin(); iter != (*paccounts).end(); iter++)
+                {
+                    if ((*iter)->id[0] != 'C' && (*ptdate).getMonth() != 1)continue;
+                    else { (*iter)->settle((*ptdate)); }
+                }
             }
             (*ptdate) = Date((*ptdate).getYear(), (*ptdate).getMonth(), day);
             int accountsLength = (*paccounts).size();

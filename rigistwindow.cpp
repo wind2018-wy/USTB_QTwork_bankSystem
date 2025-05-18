@@ -5,6 +5,7 @@
 #include <vector>
 #include <QMessageBox>
 #include <QMultiMap>
+#include <fstream>
 
 rigistWindow::rigistWindow(QWidget *parent,Date* ttdate,std::vector<Account*>* accountss)
     : QWidget(parent)
@@ -26,6 +27,12 @@ void rigistWindow::recvRigistWindow(){
 
 void rigistWindow::on_rigistOK_clicked()
 {
+    ofstream write;
+    write.open("commands.txt", std::ios::app);
+    if (!write.is_open()) {
+        qDebug()<< "open file error";
+    }
+
     double rate,credit,fee;
     if(ui->checkSaving->checkState()==Qt::Checked&&ui->checkCredit->checkState()==Qt::Checked){
         QMessageBox::warning(this,tr("warning"),tr("只能选择一种账户类型"));
@@ -101,6 +108,16 @@ void rigistWindow::on_rigistOK_clicked()
     }
 
     (*paccounts).push_back(account);
+    write<<endl<<"a ";
+    Account *accounta=(*paccounts).back();
+    if(accounta->id[0]=='C')
+        write<<"c ";
+    else
+        write<<"s ";
+    write<<name.toStdString()+' '+pass.toStdString()+' '+QString::number(rate).toStdString();
+    if(accounta->id[0]=='C')
+        write<<credit<<' '<<fee<<endl;
+    write.close();
     QMessageBox::information(this, tr("提示"), tr("注册成功"));
     this->hide();
 }
