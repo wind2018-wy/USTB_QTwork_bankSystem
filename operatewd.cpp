@@ -66,7 +66,12 @@ void operateWD::on_bWithdraw_clicked()
     }
     QString QSthing=ui->thingEdit->text();
     if((*paccounts)[index]->balance-amount<-(*paccounts)[index]->credit){
-        QMessageBox::information(this, tr("提示"), tr("取钱失败，超出信用额度"));
+        if((*paccounts)[index]->id[0]=='C'){
+            QMessageBox::warning(this,tr("warning"),tr("取钱失败，超出信用额度"));
+        }
+        else{
+            QMessageBox::warning(this,tr("warning"),tr("取钱失败，余额不足"));
+        }
         return;
     }
     (*paccounts)[index]->withdraw(*ptdate, amount, QSthing);
@@ -178,10 +183,11 @@ void operateWD::on_showMessage_clicked()
         return;
     }
     std::multimap<Date, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
+    qDebug()<<QString::number(index);
     for (iter = (*paccounts)[index]->recordmap.begin(); iter != (*paccounts)[index]->recordmap.end(); iter++) {
         if (iter->first < date1)continue;
         if (iter->first > date2)break;
-        ui->queryBrow->setText(QString::number(iter->first.year)+'-'+QString::number(iter->first.month)+'-'+QString::number(iter->first.day)+"     "+iter->second.account->id+"     "+QString::number(iter->second.balance));
+        ui->queryBrow->setText(QString::number(iter->first.year)+'-'+QString::number(iter->first.month)+'-'+QString::number(iter->first.day)+"     "+iter->second.account->id+"     "+QString::number(iter->second.amount)+"     "+QString::number(iter->second.balance));
 
     }
 }

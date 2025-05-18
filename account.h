@@ -99,5 +99,4 @@ public:
     double amount;//金额
     double balance;//余额
     QString desc;//描述
-
 };

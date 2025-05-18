@@ -11,7 +11,7 @@ QString Account::getid(){
     return id;
 }
 void Date::setDate(int a,int b,int c){
-    year=a;month=b;day=c;
+    year=a;month=b;day=c;//record
 }
 
 
