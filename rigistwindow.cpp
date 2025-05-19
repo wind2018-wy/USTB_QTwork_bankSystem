@@ -57,17 +57,24 @@ void rigistWindow::on_rigistOK_clicked()
         QMessageBox::warning(this,tr("warning"),tr("利率不能为空"));
         this->hide();
         return;
-        ok=toDouble(ui->rateEdit->text(),rate);
+    }
+        //ok=toDouble(ui->rateEdit->text(),rate);
+        rate=ui->rateEdit->text().toDouble(&ok);
+
         if(!ok){
             QMessageBox::warning(this,tr("warning"),tr("利率不是数字"));
             return;
         }
-    }
+
     if(ui->checkCredit->checkState()==Qt::Checked&&ui->creditEdit->text().length()==0){
         QMessageBox::warning(this,tr("warning"),tr("信用额度不能为空"));
         this->hide();
         return;
-        ok=toDouble(ui->creditEdit->text(),credit);
+        }
+    if(ui->checkCredit->checkState()==Qt::Checked){
+        //ok=toDouble(ui->creditEdit->text(),credit);
+        credit=ui->creditEdit->text().toDouble(&ok);
+
         if(!ok){
             QMessageBox::warning(this,tr("warning"),tr("信用额度不是数字"));
             return;
@@ -76,7 +83,11 @@ void rigistWindow::on_rigistOK_clicked()
     if(ui->checkCredit->checkState()==Qt::Checked&&ui->feeEdit->text().length()==0){
         QMessageBox::warning(this,tr("warning"),tr("年费不能为空"));
         return;
-        ok=toDouble(ui->feeEdit->text(),fee);
+        }
+    if(ui->checkCredit->checkState()==Qt::Checked){
+        //ok=toDouble(ui->feeEdit->text(),fee);
+        fee=ui->feeEdit->text().toDouble(&ok);
+
         if(!ok){
             QMessageBox::warning(this,tr("warning"),tr("年费不是数字"));
             return;
@@ -116,7 +127,7 @@ void rigistWindow::on_rigistOK_clicked()
         write<<"s ";
     write<<name.toStdString()+' '+pass.toStdString()+' '+QString::number(rate).toStdString();
     if(accounta->id[0]=='C')
-        write<<credit<<' '<<fee<<endl;
+        write<<' '<<credit<<' '<<fee<<endl;
     write.close();
     QMessageBox::information(this, tr("提示"), tr("注册成功"));
     this->hide();

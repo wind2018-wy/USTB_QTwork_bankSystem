@@ -42,6 +42,10 @@ void operateWD::on_bDeposit_clicked()
     (*paccounts)[index]->deposit(*ptdate, amount, QSthing);
 
     std::ofstream out;
+    out.open("commands.txt", std::ios::app);
+    if (!out.is_open()) {
+        qDebug()<< "open file error";
+    }
     out<<"d "<<index<<' '<<amount;
     if(QSthing.length()!=0)
         out<<' '<<QSthing.toStdString()<<std::endl;
@@ -77,8 +81,12 @@ void operateWD::on_bWithdraw_clicked()
     (*paccounts)[index]->withdraw(*ptdate, amount, QSthing);
 
     std::ofstream out;
+    out.open("commands.txt", std::ios::app);
+    if (!out.is_open()) {
+        qDebug()<< "open file error";
+    }
     out<<"d "<<index<<' '<<amount;
-    if(QSthing.length()!=0)
+    if(QSthing.length()!=0)//out
         out<<' '<<QSthing.toStdString()<<std::endl;
     out.close();
 
@@ -149,6 +157,10 @@ void operateWD::on_changeDate_clicked()
         }
 
         std::ofstream out;
+        out.open("commands.txt", std::ios::app);
+        if (!out.is_open()) {
+            qDebug()<< "open file error";
+        }
         if(month>9){
             if(day>9){
                 out<<"C "<<year<<'/'<<month<<'/'<<day<<std::endl;
