@@ -6,12 +6,8 @@
 
 //account.h
 #pragma once
-#include<iostream>
-#include<string>
-#include<map>
-#include<any>
-#include<vector>
 #include<QString>
+#include<map>
 int monthDays(int, int);
 class Date;
 void printDate(Date);
@@ -70,7 +66,9 @@ public:
     virtual void settle(Date) = 0;
     static void record(Date, double, Account*);//记录
     static void query(Date, Date);//查询
+    static void querya(Date,Date);
     static std::multimap<Date, AccountRecord>recordmap;
+    static std::multimap<double,AccountRecord>recordmapa;
 };
 class SavingsAccount :public Account {
 public:

@@ -88,8 +88,8 @@
   <widget class="QTextBrowser" name="queryBrow">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>270</y>
+     <x>130</x>
+     <y>280</y>
      <width>256</width>
      <height>192</height>
     </rect>
@@ -175,6 +175,42 @@
    </property>
    <property name="text">
     <string>到</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="queryBrowA">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>280</y>
+     <width>256</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>260</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>按时间排序</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>260</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>按金额排序</string>
    </property>
   </widget>
  </widget>

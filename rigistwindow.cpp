@@ -128,6 +128,9 @@ void rigistWindow::on_rigistOK_clicked()
     write<<name.toStdString()+' '+pass.toStdString()+' '+QString::number(rate).toStdString();
     if(accounta->id[0]=='C')
         write<<' '<<credit<<' '<<fee<<endl;
+    else{
+        write<<endl;
+    }
     write.close();
     QMessageBox::information(this, tr("提示"), tr("注册成功"));
     this->hide();

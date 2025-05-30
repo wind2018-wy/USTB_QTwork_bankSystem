@@ -1,6 +1,7 @@
 #include "account.h"
 #include <vector>
 #include <QString>
+#include <QDebug>
 
 SavingsAccount::SavingsAccount(Date triDate, QString strid, double rate,QString passa) :Account(strid, 0, rate,passa) {
     accumulation = 0;
@@ -19,6 +20,7 @@ void Date::setDate(int a,int b,int c){
 
 double Account::total = 0;
 std::multimap<Date, AccountRecord> Account::recordmap;//相当于元素为std::multimap<Date, AccountRecord>的容器
+std::multimap<double,AccountRecord> Account::recordmapa;
 double Account::getTotal() {
     return total;
 }
@@ -29,18 +31,28 @@ void Account::record(Date date, double amount, Account* cur) {
     a.account = cur;
     a.balance = cur->balance;
     recordmap.insert(std::pair<Date, AccountRecord>(date, a));
+    recordmapa.insert(std::pair<double,AccountRecord>(amount>=0?amount:-amount,a));
 }
 void Account::query(Date date1, Date date2) {
     std::multimap<Date, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
     for (iter = recordmap.begin(); iter != recordmap.end(); iter++) {
         if (iter->first < date1)continue;
         if (iter->first > date2)break;
-        printDate(iter->first);
+        //printDate(iter->first);
+        //qDebug()<<recordmap.size();
         /*
         std::cout << ' ' << iter->second.account->id;
         std::cout << ' ' << iter->second.amount
                   << ' ' << iter->second.balance << std::endl;
 */
+    }
+}
+void Account::querya(Date date1, Date date2){
+    std::multimap<double, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
+    for (iter = recordmapa.begin(); iter != recordmapa.end(); iter++) {
+        if(iter->second.date<date1||iter->second.date>date2)
+            continue;
+        //printDate(iter->first);
     }
 }
 double SavingsAccount::accumulate(Date date) {

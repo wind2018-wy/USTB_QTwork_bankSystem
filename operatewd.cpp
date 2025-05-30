@@ -49,6 +49,8 @@ void operateWD::on_bDeposit_clicked()
     out<<"d "<<index<<' '<<amount;
     if(QSthing.length()!=0)
         out<<' '<<QSthing.toStdString()<<std::endl;
+    else
+        out<<std::endl;
     out.close();
 
     QMessageBox::information(this, tr("提示"), tr("存钱成功"));
@@ -88,6 +90,8 @@ void operateWD::on_bWithdraw_clicked()
     out<<"d "<<index<<' '<<amount;
     if(QSthing.length()!=0)//out
         out<<' '<<QSthing.toStdString()<<std::endl;
+    else
+        out<<std::endl;
     out.close();
 
     QMessageBox::information(this, tr("提示"), tr("取钱成功"));
@@ -195,12 +199,22 @@ void operateWD::on_showMessage_clicked()
         return;
     }
     std::multimap<Date, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
-    qDebug()<<QString::number(index);
+    //qDebug()<<QString::number(index);
+    ui->queryBrow->clear();
     for (iter = (*paccounts)[index]->recordmap.begin(); iter != (*paccounts)[index]->recordmap.end(); iter++) {
         if (iter->first < date1)continue;
-        if (iter->first > date2)break;
-        ui->queryBrow->setText(QString::number(iter->first.year)+'-'+QString::number(iter->first.month)+'-'+QString::number(iter->first.day)+"     "+iter->second.account->id+"     "+QString::number(iter->second.amount)+"     "+QString::number(iter->second.balance));
+        if (iter->first > date2)continue;
+        ui->queryBrow->append(QString::number(iter->first.year)+'-'+QString::number(iter->first.month)+'-'+QString::number(iter->first.day)+"     "+iter->second.account->id+"     "+QString::number(iter->second.amount)+"     "+QString::number(iter->second.balance));
 
     }
+    ui->queryBrowA->clear();
+    std::multimap<double, AccountRecord>::iterator itera;
+    for(itera=(*paccounts)[index]->recordmapa.begin();itera!=(*paccounts)[index]->recordmapa.end();itera++){
+        if(itera->second.date<date1||itera->second.date>date2)
+            continue;
+        ui->queryBrowA->append(QString::number(itera->second.date.year)+'-'+QString::number(itera->second.date.month)+'-'+QString::number(itera->second.date.day)+"     "+itera->second.account->id+"     "+QString::number(itera->second.amount)+"     "+QString::number(itera->second.balance));
+
+    }
+
 }
 

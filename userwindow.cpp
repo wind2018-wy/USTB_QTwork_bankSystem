@@ -57,6 +57,10 @@ void userWindow::on_sign_clicked()
         return;
     }
 
+    if((*paccounts)[numAccount]->id[0]=='C'&&(*paccounts)[numAccount]->balance<0){
+        QMessageBox::information(this, tr("警告"),tr("您有欠款 %1").arg(QString::number((*paccounts)[numAccount]->balance, 'f', 2)));
+    }
+
     static operateWD riwin(nullptr,ptdate,paccounts,numAccount);
     QObject::connect(this,SIGNAL(showOperateWD()),&riwin,SLOT(recvOperateWD()));
     emit showOperateWD();
