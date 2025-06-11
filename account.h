@@ -90,6 +90,9 @@ public:
     void settle(Date);
     double accumulate(Date date);
 };
+struct deleter {
+    template <class T> void operator () (T* p) { delete p; }
+};
 class AccountRecord {
 public:
     Date date;//日期

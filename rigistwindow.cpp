@@ -105,6 +105,10 @@ void rigistWindow::on_rigistOK_clicked()
         account=new CreditAccount(*ptdate,name,credit,rate,fee,pass);
     }
 
+    if(name[0]=='C'&&ui->checkSaving->checkState()==Qt::Checked){
+        QMessageBox::warning(this,tr("warning"),tr("储蓄卡账户名不能以大写字母C开头"));
+        return;
+    }
 
     if(name[0]!='C'&&ui->checkCredit->checkState()==Qt::Checked){
         QMessageBox::warning(this,tr("warning"),tr("信用卡账户名应以大写字母C开头"));

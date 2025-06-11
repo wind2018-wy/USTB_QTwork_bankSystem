@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
             Date date1,date2;
             date1.setDate(year1,month1,day1);
             date2.setDate(year2,month2,day2);
-            std::multimap<Date, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
+            std::multimap<Date, AccountRecord>::iterator iter;
             for (iter = (*paccounts)[index]->recordmap.begin(); iter != (*paccounts)[index]->recordmap.end(); iter++) {
                 if (iter->first < date1)continue;
                 if (iter->first > date2)break;

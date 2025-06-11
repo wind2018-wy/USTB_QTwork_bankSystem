@@ -19,7 +19,7 @@ void Date::setDate(int a,int b,int c){
 
 
 double Account::total = 0;
-std::multimap<Date, AccountRecord> Account::recordmap;//相当于元素为std::multimap<Date, AccountRecord>的容器
+std::multimap<Date, AccountRecord> Account::recordmap;
 std::multimap<double,AccountRecord> Account::recordmapa;
 double Account::getTotal() {
     return total;

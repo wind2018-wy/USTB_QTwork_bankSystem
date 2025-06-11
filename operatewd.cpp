@@ -198,7 +198,7 @@ void operateWD::on_showMessage_clicked()
         QMessageBox::warning(this,tr("warning"),tr("结束日期应晚于起始日期"));
         return;
     }
-    std::multimap<Date, AccountRecord>::iterator iter;//迭代器相当于一个结构体，类型为std::multimap<Date, AccountRecord>
+    std::multimap<Date, AccountRecord>::iterator iter;
     //qDebug()<<QString::number(index);
     ui->queryBrow->clear();
     for (iter = (*paccounts)[index]->recordmap.begin(); iter != (*paccounts)[index]->recordmap.end(); iter++) {
